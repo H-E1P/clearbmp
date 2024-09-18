@@ -49,7 +49,7 @@ file = File.new([js_array], "clear.bmp", {type: "image/bmp"})
 url = URL.createObjectURL(file)
 
 hidden_link = document.createElement("a")
-hidden_link.setAttribute("download", "my_other_file_name.txt")
+hidden_link.setAttribute("download", "clear.bmp")
 hidden_link.setAttribute("href", url)
 hidden_link.click()
         </py-script>
