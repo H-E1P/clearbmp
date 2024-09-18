@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title> make clear bmp </title>
+        <script>
+function inputaguseuni(id) {
+    var ret = document.getElementById(id);
+    
+    ret.select();
+    ret.setSelectionRange(0, 99999);
+    
+    return ret.value;
+}
+
+function copy() {
+    var xl = inputaguseuni('xl');
+    var yl = inputaguseuni('yl');
+    var xp = inputaguseuni('xp');
+    var yp = inputaguseuni('yp');
+    
+    navigator.clipboard.writeText(`https://H-E1P.github.io/clearbmp/clearimgrsrpage?xl=${xl}&yl=${yl}&xp=${xp}&yp=${yp}`);
+}
+        </script>
+    </head>
+    <body>
+        <h1> make clear bmp </h1>
+        <div>
+            <p> x pixel </p><input id='xl'><br>
+            <p> y pixel </p><input id='yl'><br>
+            <p> x resolution (pixel per meter) </p><input id='xp'><br>
+            <p> y resolution (pixex per meter) </p><input id='yp'><br>
+            <button onclick="copy()"> download link copy button </button>
+        </div>
+        
+        <p> I was very mad because, yesterday I googled the "transparent background image", but the result is sucks, so I made this page, now I can use transparent background image, I need the img to make my post on instagram. haha..... tlqkf!!!!!!! </p>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.7.1/core.css" />
+        <script type="module" src="https://pyscript.net/releases/2024.7.1/core.js"></script>
+        <title> clear img resource </title>
+    </head>
+    <body>
+        <py-script>
+from js import Uint8Array, File, URL, document
+import io
+from js import URLSearchParams, window
+
+def byter(x, p = 0):
+    return  x.to_bytes(4, byteorder = 'little', signed = 1) if p else x.to_bytes(4, byteorder = 'little')
+
+def gens(xl, yl, xp, yp):
+    payload = 4*xl*yl
+    return b''.join(
+        (
+            b'BM', 
+            byter(50 + payload),
+            b'\0\0\0\03\0\0\0(\0\0\0', 
+            byter(xl), 
+            byter(yl), 
+            b'\1\0\0\0 \0\0\0\0\0\0\0', 
+            byter(payload), 
+            byter(xp), 
+            byter(yp), 
+            b'\1\0\0\0\0\0\0\0\0\0\0\0', 
+            *(b'\ff\0\0\0' for _ in range(xp*yp))
+        )
+    )
+
+_args = URLSearchParams.new(window.location.search)
+
+def getv(i):
+    return _args.get(i)
+
+encoded_data = gens(getv('xl'), getv('yl'), getv('xp'), getv('yp'))
+my_stream = io.BytesIO(encoded_data)
+
+js_array = Uint8Array.new(len(encoded_data))
+js_array.assign(my_stream.getbuffer())
+
+file = File.new([js_array], "clear.bmp", {type: "image/bmp"})
+url = URL.createObjectURL(file)
+
+hidden_link = document.createElement("a")
+hidden_link.setAttribute("download", "my_other_file_name.txt")
+hidden_link.setAttribute("href", url)
+hidden_link.click()
+        </py-script>
+    </body>
+</html>
