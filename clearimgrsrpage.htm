@@ -39,7 +39,7 @@ def gens(xl, yl, xp, yp):
 #01 00 00 00 (1 ; number of color ; [clear])
 #00 00 00 00 ((all importdent) : 0=inf=max)
 #00 00 00 00 (always 0)
-            *(b'\xff\0\0\0' for _ in range(xp*yp))
+            *(b'\0\0\0\xff' for _ in range(xp*yp))
 #\ff doesn't work (=\x0c\x66) but \xff works.
         )
     )
