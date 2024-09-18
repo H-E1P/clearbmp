@@ -39,7 +39,7 @@ _args = URLSearchParams.new(window.location.search)
 def getv(i):
     return _args.get(i)
 
-encoded_data = gens(getv('xl'), getv('yl'), getv('xp'), getv('yp'))
+encoded_data = gens(int(getv('xl')), int(getv('yl')), int(getv('xp')), int(getv('yp')))
 my_stream = io.BytesIO(encoded_data)
 
 js_array = Uint8Array.new(len(encoded_data))
